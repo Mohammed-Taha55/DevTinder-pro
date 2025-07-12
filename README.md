@@ -60,3 +60,5 @@ const Connections = () => {
     cd downloads
     chmod 400 "Dev Tinder-secret.pem"
     ssh -i "Dev Tinder-secret.pem" ubuntu@ec2-16-171-64-98.eu-north-1.compute.amazonaws.com
+    export const Base_URL = import.meta.env.PROD ? "/api" : "http://localhost:7777/api";
+export const Base_URL = "/api";
