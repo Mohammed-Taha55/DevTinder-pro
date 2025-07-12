@@ -55,7 +55,6 @@ const Connections = () => {
 
    yusuf90@gamil.com
     Yusuf@123
-
     how use cmd in ubantu:-
     cd downloads
     chmod 400 "Dev Tinder-secret.pem"
