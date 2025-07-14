@@ -23,48 +23,61 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
-  if (!connections) return;
-  if (connections.length === 0) return <h1 className="flex justify-center my-10">No Connections Found</h1>;
+  if (!connections) return null;
+  if (connections.length === 0)
+    return (
+      <div className="flex justify-center items-center h-40">
+        <h1 className="text-2xl font-semibold text-gray-400">
+          🧍 No Connections Found
+        </h1>
+      </div>
+    );
 
   return (
-    <div className="text-center my-10">
-      <h1 className="text-bold text-white text-3xl">Connections</h1>
+    <div className="my-10 px-4">
+      <h1 className="text-center text-3xl font-bold mb-8 text-white">
+        🤝 Your Connections
+      </h1>
 
-      {connections.map((connection, index) => {
-        if (!connection || !connection.firstName) return null;
+      <div className="flex flex-col gap-6 max-w-3xl mx-auto">
+        {connections.map((connection, index) => {
+          if (!connection || !connection.firstName) return null;
 
-        const {
-          _id = index,
-          firstName = "",
-          lastName = "",
-          photoUrl = "https://via.placeholder.com/80", // fallback image
-          age,
-          gender,
-          about = "No description",
-        } = connection;
+          const {
+            _id = index,
+            firstName = "",
+            lastName = "",
+            photoUrl = "https://via.placeholder.com/80",
+            age,
+            gender,
+            about = "No description",
+          } = connection;
 
-        return (
-          <div
-            key={_id}
-            className="flex m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto"
-          >
-            <div>
-              <img
-                alt="photo"
-                className="w-20 h-20 rounded-full"
-                src={photoUrl}
-              />
+          return (
+            <div
+              key={_id}
+              className="card bg-base-200 shadow-md hover:shadow-lg transition-all duration-200"
+            >
+              <div className="card-body flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                <img
+                  alt="user"
+                  className="w-20 h-20 rounded-full object-cover border shadow"
+                  src={photoUrl}
+                />
+                <div className="flex-1 text-left">
+                  <h2 className="text-xl font-bold text-primary">
+                    {firstName} {lastName}
+                  </h2>
+                  {age && gender && (
+                    <p className="text-sm text-gray-500">{`${age} • ${gender}`}</p>
+                  )}
+                  <p className="mt-1 text-sm">{about}</p>
+                </div>
+              </div>
             </div>
-            <div className="text-left mx-4">
-              <h2 className="font-bold text-xl">
-                {firstName + " " + lastName}
-              </h2>
-              {age && gender && <p>{age + " " + gender}</p>}
-              <p>{about}</p>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
